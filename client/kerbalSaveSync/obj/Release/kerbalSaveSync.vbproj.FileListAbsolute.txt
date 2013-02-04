@@ -1,0 +1,11 @@
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\bin\Release\kerbalSaveSync.exe.config
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\bin\Release\kerbalSaveSync.exe
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\bin\Release\kerbalSaveSync.pdb
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\bin\Release\kerbalSaveSync.xml
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Release\ResolveAssemblyReference.cache
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Release\kerbalSaveSync.Form1.resources
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Release\kerbalSaveSync.Resources.resources
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Release\kerbalSaveSync.vbproj.GenerateResource.Cache
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Release\kerbalSaveSync.exe
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Release\kerbalSaveSync.xml
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Release\kerbalSaveSync.pdb

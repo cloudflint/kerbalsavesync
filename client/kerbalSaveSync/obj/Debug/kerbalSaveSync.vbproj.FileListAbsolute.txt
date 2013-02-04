@@ -1,0 +1,21 @@
+C:\Users\user\AppData\Local\Temporary Projects\kerbalSaveSync\bin\Debug\kerbalSaveSync.exe
+C:\Users\user\AppData\Local\Temporary Projects\kerbalSaveSync\bin\Debug\kerbalSaveSync.pdb
+C:\Users\user\AppData\Local\Temporary Projects\kerbalSaveSync\bin\Debug\kerbalSaveSync.xml
+C:\Users\user\AppData\Local\Temporary Projects\kerbalSaveSync\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\user\AppData\Local\Temporary Projects\kerbalSaveSync\obj\Debug\kerbalSaveSync.Form1.resources
+C:\Users\user\AppData\Local\Temporary Projects\kerbalSaveSync\obj\Debug\kerbalSaveSync.Resources.resources
+C:\Users\user\AppData\Local\Temporary Projects\kerbalSaveSync\obj\Debug\kerbalSaveSync.vbproj.GenerateResource.Cache
+C:\Users\user\AppData\Local\Temporary Projects\kerbalSaveSync\obj\Debug\kerbalSaveSync.exe
+C:\Users\user\AppData\Local\Temporary Projects\kerbalSaveSync\obj\Debug\kerbalSaveSync.xml
+C:\Users\user\AppData\Local\Temporary Projects\kerbalSaveSync\obj\Debug\kerbalSaveSync.pdb
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Debug\kerbalSaveSync.exe
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Debug\kerbalSaveSync.xml
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Debug\kerbalSaveSync.pdb
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\bin\Debug\kerbalSaveSync.exe
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\bin\Debug\kerbalSaveSync.pdb
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\bin\Debug\kerbalSaveSync.xml
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Debug\kerbalSaveSync.Form1.resources
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Debug\kerbalSaveSync.Resources.resources
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Debug\kerbalSaveSync.vbproj.GenerateResource.Cache
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\bin\Debug\kerbalSaveSync.exe.config
