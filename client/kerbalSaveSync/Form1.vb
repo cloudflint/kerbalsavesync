@@ -13,7 +13,6 @@
 
 
 Imports System.IO
-Imports System.Data.SqlClient
 Imports MySql.Data.MySqlClient
 
 Public Class Form1
@@ -26,15 +25,17 @@ Public Class Form1
     'This whole thing is in extreme alpha right now, if you trust this program with any data that you care about you are insane
     'The way it tracks what files are who's is kinda sucky
     'this whole thing is in general full of holes
-    'allot of the console output needs to be formatted better
+    'alot of the console output needs to be formatted better
 
     'BUGS
     'Trying to sync a save with no vessels in it causes crash
+    'Various unhandled errors which could cause program to fail horribly, see warnings about possible null reference exceptions being thrown in the vb.net error list
 
     'NOTES
     'need to install mysql driver
 
     'filepaths and stuff
+    'config is saved in C:\Users\<username>\AppData\Local\kerbalSaveSync
     Dim mainsavelocation As String
     Dim ownedships()
 
@@ -70,6 +71,7 @@ Public Class Form1
         'splash stuff in console
         Console.WriteLine("Kerbal space program save sync program")
         Console.WriteLine("Developed by J. Turner 2013")
+        Console.WriteLine("V0.001 (Dev)")
         Console.WriteLine("The soul of man has been given wings, and at last he is beginning to fly.")
 
 
@@ -125,7 +127,7 @@ Public Class Form1
 
         Console.Write("Beginning save synchronisation")
         Console.Write(vbLf)
-        Console.Write("'A well oiled toaster oven'") 'Where all my q3map2 modders at!
+        Console.Write("A well oiled toaster oven") 'Where all my q3map2 modders at!
         Console.Write(vbLf)
         Console.Write("Reading list of vessesls from server")
         Console.Write(vbLf)
@@ -313,7 +315,7 @@ Public Class Form1
 
         'read the new list of ships from the server
         Console.Write(vbCrLf)
-        Console.Write("Checking list of ships on server after upload")
+        Console.Write("Checking list of ships on server after upload" & vbLf)
         'begin read list of ships from server
         'clear the old server list
         ReDim servervessellist(0 To 0)
@@ -335,11 +337,11 @@ Public Class Form1
         End Using
         i = 0
 
-
+        Console.Write("Downloading actual vessel data from server" & vbLf)
         For Each temp In servervessellist
 
             'ok, read all vessel data into array
-            Console.Write("Downloading actual vessel data fro mserver")
+            Console.Write("Downloading ship: " & temp & vbLf)
             'begin read list of ships from server
 
             Using conn As New MySqlConnection(connStr)
@@ -364,7 +366,7 @@ Public Class Form1
         'ok, we have all the vessel data in, now to build the save file!
         Console.Write("Vessel data downloaded")
         Console.Write(vbLf)
-        Console.Write("rebuilding persistant file")
+        Console.Write("rebuilding persistant file" & vbLf)
         'get the text that goes in befroe the list of vessels >:D
         If savefiledata.IndexOf(vbTab & vbTab & "CREW") <> -1 Then
             endIndex = savefiledata.IndexOf(vbTab & vbTab & "CREW")
@@ -432,13 +434,15 @@ Public Class Form1
         Console.Write("Finised writing persistant file")
         Console.Write(vbLf)
         Console.Write("Finsihed Sync!")
+        Console.Write(vbLf)
         Console.Write("Gods in his heaven alls right with the world") 'i'd like to say this was a Robert Browning reference, but im not that sophisticated
 
     End Sub
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
 
-        If mainsavelocation.Length > 0 Then
+        If mainsavelocation Is Nothing Then
+        Else
             Button5.Enabled = True
         End If
 
