@@ -9,3 +9,4 @@ C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSyn
 C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Release\kerbalSaveSync.exe
 C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Release\kerbalSaveSync.xml
 C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Release\kerbalSaveSync.pdb
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\bin\Release\MySql.Data.dll

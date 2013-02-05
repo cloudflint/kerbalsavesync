@@ -26,6 +26,8 @@ Public Class Form1
     'The way it tracks what files are who's is kinda sucky
     'this whole thing is in general full of holes
     'alot of the console output needs to be formatted better
+    'all the sql server connection info is curently hard coded in
+    'need to add a mechanism to have vessels deleted off the server when they no longer exist in the owners save
 
     'BUGS
     'Trying to sync a save with no vessels in it causes crash
@@ -71,7 +73,7 @@ Public Class Form1
         'splash stuff in console
         Console.WriteLine("Kerbal space program save sync program")
         Console.WriteLine("Developed by J. Turner 2013")
-        Console.WriteLine("V0.001 (Dev)")
+        Console.WriteLine("V0.002 (Dev)")
         Console.WriteLine("The soul of man has been given wings, and at last he is beginning to fly.")
 
 
@@ -113,7 +115,7 @@ Public Class Form1
         Dim servervessels()
         Dim i As Integer = 0 'general integer for loops 
         Dim x As Integer = 0 'general integer for loops
-        Dim connStr As String = "server=" & "192.168.1.70" & ";" & "user id=" & "kspships" & ";" & "password=" & "zm5L7Jta5caSua2X" & ";" & "database=kspships"
+        Dim connStr As String = "server=" & "25.69.70.140" & ";" & "user id=" & "kspships" & ";" & "password=" & "zm5L7Jta5caSua2X" & ";" & "database=kspships"
         Dim mainsave As String = mainsavelocation '//Location of main save
         Dim savefiledata As String = IO.File.ReadAllText(mainsave) '// read file into a String.
         Dim temp As String
