@@ -73,7 +73,7 @@ Public Class Form1
         'splash stuff in console
         Console.WriteLine("Kerbal space program save sync program")
         Console.WriteLine("Developed by J. Turner 2013")
-        Console.WriteLine("V0.002 (Dev)")
+        Console.WriteLine("V0.003 (Dev)")
         Console.WriteLine("The soul of man has been given wings, and at last he is beginning to fly.")
 
 
