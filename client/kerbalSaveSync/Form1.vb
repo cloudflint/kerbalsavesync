@@ -28,13 +28,21 @@ Public Class Form1
     'alot of the console output needs to be formatted better
     'all the sql server connection info is curently hard coded in
     'need to add a mechanism to have vessels deleted off the server when they no longer exist in the owners save
+    'Various outher issues that need documented!
 
     'BUGS
     'Trying to sync a save with no vessels in it causes crash
     'Various unhandled errors which could cause program to fail horribly, see warnings about possible null reference exceptions being thrown in the vb.net error list
+    'various outher bugs that need documented!
 
-    'NOTES
+    'BUILD NOTES
     'need to install mysql driver
+
+    'CHANGELOG
+    'v0.003 (dev)
+    'started changelog!
+    'Added code to allow deletion of players owned ships to be synced to server
+    'fixed error where owned vessels where not being saved correctly
 
     'filepaths and stuff
     'config is saved in C:\Users\<username>\AppData\Local\kerbalSaveSync
@@ -73,7 +81,7 @@ Public Class Form1
         'splash stuff in console
         Console.WriteLine("Kerbal space program save sync program")
         Console.WriteLine("Developed by J. Turner 2013")
-        Console.WriteLine("V0.003 (Dev)")
+        Console.WriteLine("V0.004 (Dev)")
         Console.WriteLine("The soul of man has been given wings, and at last he is beginning to fly.")
 
 
@@ -125,6 +133,7 @@ Public Class Form1
         Dim vessels() 'holds vessel data extracted from local save
         Dim vesselnames() 'holds list of vessesl names extracted from local save
         Dim startingtext As String
+
         'end variable decelerations
 
         Console.Write("Beginning save synchronisation")
@@ -225,7 +234,6 @@ Public Class Form1
             End If
 
 
-
             'if the ship we found in the local save file isnt found on the server, take owenrship of it.
             If found = False Then
 
@@ -235,15 +243,17 @@ Public Class Form1
                     My.Settings.ownedships = "," & ownedships(0)
                     My.Settings.Save()
                     Console.Write("Taking ownership of ship: " & temp & vbLf)
+                    Console.WriteLine("first owned ship")
                 Else
                     If ownedships.Contains(temp) Then
                         'do nothing
                     Else
                         ReDim Preserve ownedships(0 To ownedships.Length)
                         ownedships(ownedships.Length - 1) = temp
-                        My.Settings.ownedships = "," & ownedships(ownedships.Length - 1)
+                        My.Settings.ownedships = My.Settings.ownedships & "," & ownedships(ownedships.Length - 1)
                         My.Settings.Save()
                         Console.Write("Taking ownership of ship: " & temp & vbLf)
+
                     End If
                 End If
 
@@ -261,7 +271,7 @@ Public Class Form1
         i = 0
 
 
-        
+
         Console.Write(vbCrLf)
         Console.Write("owened ships list is as follows:")
         Console.Write(vbCrLf)
@@ -273,10 +283,19 @@ Public Class Form1
                 Console.Write(temp & vbLf)
             Next
         End If
-       
+
         Console.Write(vbCrLf)
         Console.Write("Done listing owned ships")
         Console.Write(vbCrLf)
+
+
+
+
+
+
+
+
+
 
         'ok, we have the list of vessesl we own, now to download every ship but those from the server
         Console.Write("Uploading owned ships to server" & vbLf)
@@ -312,12 +331,96 @@ Public Class Form1
 
         End If
 
-       
+
 
 
         'read the new list of ships from the server
         Console.Write(vbCrLf)
         Console.Write("Checking list of ships on server after upload" & vbLf)
+        'begin read list of ships from server
+        'clear the old server list
+        ReDim servervessellist(0 To 0)
+
+        Using conn As New MySqlConnection(connStr)
+            Using cmd As New MySqlCommand("SELECT pid FROM ships", conn)
+                conn.Open()
+                Using reader As MySqlDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        'Console.WriteLine("{0}, {1}", reader.GetString(0), reader.GetString(1))
+
+                        ReDim Preserve servervessellist(0 To i)
+                        servervessellist(i) = reader.GetString(0)
+                        Console.WriteLine("{0}", reader.GetString(0) & vbLf)
+                        i = i + 1
+                    End While
+                End Using
+            End Using
+        End Using
+        i = 0
+
+
+
+
+
+        'remove owned ships which have been deleted
+        'ok if a vessel is in servervessellist() and ownedships() but not in vesselnames(), that means we own it and have deleted it from our save, so remove it from the server
+        Console.Write(vbLf)
+        Console.Write(vbLf)
+        Console.WriteLine("Sync deleted ships to server")
+
+        For Each temp0 In ownedships 'loop through the list of vessels we own
+            found = False
+            Console.WriteLine("checking owned ship: " & temp0)
+            For Each temp1 In vesselnames 'loop through the list of ships in our save file
+
+                If temp0 Is Nothing Or temp1 Is Nothing Then
+
+                Else
+                    If temp0 = temp1 Then
+                        found = True
+                        Console.WriteLine(temp0 & " = " & temp1)
+
+                    End If
+
+                End If
+
+
+
+
+            Next
+
+            If found = True Then
+                'ok we found the vessel in our owned ships list and its in our save, that means it exists so we can leave it!
+            Else
+                'ok, the ship exists in our list of owned ships but isnt in our save, that means it dosent exist, so lets see if its still on the server and if it is destroy it!
+
+                If servervessellist.Contains(temp0) Then
+                    'ok, we found the vessel in our list of ships on the server, so delete it!
+                    Console.WriteLine("Deleting ship: " & temp0)
+                    Using conn As New MySqlConnection(connStr)
+                        Using cmd As New MySqlCommand("DELETE FROM ships WHERE pid='" & temp0 & "'", conn)
+                            conn.Open()
+                            Using reader As MySqlDataReader = cmd.ExecuteReader()
+                                'look mum, no input!
+                            End Using
+                        End Using
+                    End Using
+
+
+                End If
+
+
+
+            End If
+
+
+
+        Next
+
+
+        'read the new list of ships from the server
+        Console.Write(vbCrLf)
+        Console.Write("Checking list of ships on server after syncing deletions" & vbLf)
         'begin read list of ships from server
         'clear the old server list
         ReDim servervessellist(0 To 0)
@@ -420,8 +523,8 @@ Public Class Form1
            & vbTab & vbTab & vbTab & "idx = 0" & vbCrLf _
            & vbTab & vbTab & "}" _
            , True)
-	
-	
+
+
         Next
 
 

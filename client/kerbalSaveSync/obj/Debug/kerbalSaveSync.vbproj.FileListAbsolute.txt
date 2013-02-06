@@ -19,3 +19,4 @@ C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSyn
 C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Debug\kerbalSaveSync.Resources.resources
 C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\obj\Debug\kerbalSaveSync.vbproj.GenerateResource.Cache
 C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\bin\Debug\kerbalSaveSync.exe.config
+C:\Users\user\Documents\Visual Studio 2008\Projects\kerbalSaveSync\kerbalSaveSync\bin\Debug\MySql.Data.dll
