@@ -26,8 +26,6 @@ Public Class Form1
     'The way it tracks what files are who's is kinda sucky
     'this whole thing is in general full of holes
     'alot of the console output needs to be formatted better
-    'all the sql server connection info is curently hard coded in
-    'need to add a mechanism to have vessels deleted off the server when they no longer exist in the owners save
     'Various outher issues that need documented!
 
     'BUGS
@@ -39,10 +37,14 @@ Public Class Form1
     'need to install mysql driver
 
     'CHANGELOG
-    'v0.003 (dev)
+    'v0.004 (dev)
     'started changelog!
     'Added code to allow deletion of players owned ships to be synced to server
     'fixed error where owned vessels where not being saved correctly
+
+    'v0.005 (dev)
+    'OFD for selecting save file now defaults to filter out all files except "persistent.sfs"
+    'user can now input their own server settings
 
     'filepaths and stuff
     'config is saved in C:\Users\<username>\AppData\Local\kerbalSaveSync
@@ -59,7 +61,7 @@ Public Class Form1
 
         fd.Title = "Open File Dialog"
         fd.InitialDirectory = "C:\"
-        fd.Filter = "All files (*.*)|*.*|All files (*.*)|*.*"
+        fd.Filter = "All files|*.*|persistent.sfs|persistent.sfs"
         fd.FilterIndex = 2
         fd.RestoreDirectory = True
 
@@ -81,7 +83,7 @@ Public Class Form1
         'splash stuff in console
         Console.WriteLine("Kerbal space program save sync program")
         Console.WriteLine("Developed by J. Turner 2013")
-        Console.WriteLine("V0.004 (Dev)")
+        Console.WriteLine("V0.005 (Dev)")
         Console.WriteLine("The soul of man has been given wings, and at last he is beginning to fly.")
 
 
@@ -96,6 +98,30 @@ Public Class Form1
             Dim temp = My.Settings.ownedships
             ownedships = temp.Split(",")
         End If
+
+        'load server settings
+
+        'load all the server settings
+        If My.Settings.dbname <> Nothing Then
+            DBname.Text = My.Settings.dbname
+        End If
+
+        If My.Settings.dbpassword <> Nothing Then
+            DBpassword.Text = My.Settings.dbpassword
+        End If
+
+        If My.Settings.dbserverip <> Nothing Then
+            DBserverip.Text = My.Settings.dbserverip
+        End If
+
+        If My.Settings.dbusername <> Nothing Then
+            DBuserid.Text = My.Settings.dbusername
+        End If
+
+
+
+
+
 
     
 
@@ -117,13 +143,25 @@ Public Class Form1
         'download ships from database
         'merge all ships into save file
 
+        'disable all the buttons to stop the user changing stuff mid-sync
+        disableall()
+
+
+        'save all the server settings
+        My.Settings.dbname = DBname.Text
+        My.Settings.dbpassword = DBpassword.Text
+        My.Settings.dbserverip = DBserverip.Text
+        My.Settings.dbusername = DBuserid.Text
+        My.Settings.Save()
+
 
         'begin variable declerations
         Dim servervessellist() ' holds list of pid's on server
         Dim servervessels()
         Dim i As Integer = 0 'general integer for loops 
         Dim x As Integer = 0 'general integer for loops
-        Dim connStr As String = "server=" & "25.69.70.140" & ";" & "user id=" & "kspships" & ";" & "password=" & "zm5L7Jta5caSua2X" & ";" & "database=kspships"
+        'Dim connStr As String = "server=" & "25.69.70.140" & ";" & "user id=" & "kspships" & ";" & "password=" & "zm5L7Jta5caSua2X" & ";" & "database=kspships"
+        Dim connStr As String = "server=" & DBserverip.Text & ";" & "user id=" & DBuserid.Text & ";" & "password=" & DBpassword.Text & ";" & "database=" & DBname.Text
         Dim mainsave As String = mainsavelocation '//Location of main save
         Dim savefiledata As String = IO.File.ReadAllText(mainsave) '// read file into a String.
         Dim temp As String
@@ -542,11 +580,18 @@ Public Class Form1
         Console.Write(vbLf)
         Console.Write("Gods in his heaven alls right with the world") 'i'd like to say this was a Robert Browning reference, but im not that sophisticated
 
+        'enable the controls again
+        enableall()
+
+
+
     End Sub
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
 
-        If mainsavelocation Is Nothing Then
+        'if any field is emptry disable the sync button
+        If mainsavelocation Is Nothing Or DBuserid.Text = String.Empty Or DBserverip.Text = String.Empty Or DBpassword.Text = String.Empty Or DBname.Text = String.Empty Then
+            Button5.Enabled = False
         Else
             Button5.Enabled = True
         End If
@@ -554,6 +599,31 @@ Public Class Form1
 
 
     End Sub
+
+    Public Sub disableall()
+        'disable all controls
+        Button5.Enabled = False
+        Button3.Enabled = False
+        DBserverip.Enabled = False
+        DBuserid.Enabled = False
+        DBpassword.Enabled = False
+        DBname.Enabled = False
+
+
+
+    End Sub
+
+    Public Sub enableall()
+        'enable all controls
+        Button5.Enabled = True
+        Button3.Enabled = True
+        DBserverip.Enabled = True
+        DBuserid.Enabled = True
+        DBpassword.Enabled = True
+        DBname.Enabled = True
+
+    End Sub
+
 End Class
 
 

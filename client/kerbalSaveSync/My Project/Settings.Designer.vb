@@ -77,6 +77,54 @@ Namespace My
                 Me("ownedships") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property dbusername() As String
+            Get
+                Return CType(Me("dbusername"),String)
+            End Get
+            Set
+                Me("dbusername") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property dbpassword() As String
+            Get
+                Return CType(Me("dbpassword"),String)
+            End Get
+            Set
+                Me("dbpassword") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property dbserverip() As String
+            Get
+                Return CType(Me("dbserverip"),String)
+            End Get
+            Set
+                Me("dbserverip") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property dbname() As String
+            Get
+                Return CType(Me("dbname"),String)
+            End Get
+            Set
+                Me("dbname") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
